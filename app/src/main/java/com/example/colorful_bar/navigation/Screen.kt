@@ -20,6 +20,7 @@ sealed class Screen(val route: String) {
 
         object TemplateScreen : SettingScreen("template_screen")
         object StateCompose : SettingScreen("state_compose")
+        object WhyNotCompose : SettingScreen("why_not_compose")
 
     }
 

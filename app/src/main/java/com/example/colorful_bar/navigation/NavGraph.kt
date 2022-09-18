@@ -13,34 +13,34 @@ import com.example.colorful_bar.screen.*
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    paddingValues: PaddingValues)
-{
+    paddingValues: PaddingValues,
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route,
         modifier = Modifier.padding(paddingValues = paddingValues)
-    ){
-        composable(route = Screen.Splash.route){
+    ) {
+        composable(route = Screen.Splash.route) {
             SplashScreen(navController = navController)
         }
 
-        composable(route = Screen.Home.route){
+        composable(route = Screen.Home.route) {
             HomeScreen()
         }
 
-        composable(route = Screen.Search.route){
+        composable(route = Screen.Search.route) {
             SearchScreen()
         }
 
-        composable(route = Screen.Profile.route){
+        composable(route = Screen.Profile.route) {
             ProfileScreen()
         }
 
-        composable(route = Screen.Setting.route){
+        composable(route = Screen.Setting.route) {
             SettingScreen(navController = navController)
         }
 
-        composable(route = Screen.Favourite.route){
+        composable(route = Screen.Favourite.route) {
             FavouriteScreen()
         }
 
@@ -53,33 +53,33 @@ fun NavGraph(
 
 
 
-        composable(route = Screen.SettingScreen.LazyVerticalGrid.route){
+        composable(route = Screen.SettingScreen.LazyVerticalGrid.route) {
             LazyVerticalGrid()
         }
 
-        composable(route = Screen.SettingScreen.AlertPage.route){
+        composable(route = Screen.SettingScreen.AlertPage.route) {
             AlertPage()
         }
 
-        composable(route = Screen.SettingScreen.CurrencyTap.route){
+        composable(route = Screen.SettingScreen.CurrencyTap.route) {
             CurrencyTap()
         }
 
-        composable(route = Screen.SettingScreen.LazyListColumn.route){
+        composable(route = Screen.SettingScreen.LazyListColumn.route) {
             LazyListColumn()
         }
 
-        composable(route = Screen.SettingScreen.TemplateScreen.route){
+        composable(route = Screen.SettingScreen.TemplateScreen.route) {
             TemplateScreen()
         }
 
-        composable(route = Screen.SettingScreen.StateCompose.route){
+        composable(route = Screen.SettingScreen.StateCompose.route) {
             ComposeStateScreen()
         }
 
-
-
-
+        composable(route = Screen.SettingScreen.WhyNotCompose.route) {
+            WhyNotCompose()
+        }
 
 
     }

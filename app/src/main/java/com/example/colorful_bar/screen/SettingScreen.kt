@@ -1,6 +1,7 @@
 package com.example.colorful_bar.screen
 
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,21 +18,27 @@ import com.example.colorful_bar.MainActivity
 import kotlin.random.Random
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
+import com.example.colorful_bar.BuildConfig
 import com.example.colorful_bar.R
 import com.example.colorful_bar.home.templates.TemplatesActivity
 import com.example.colorful_bar.navigation.Screen
@@ -94,6 +101,12 @@ fun SettingScreen(navController: NavController) {
             navController.navigate(Screen.SettingScreen.StateCompose.route)
         }) {
             Text(text = "State_Compose")
+        }
+
+        Button(onClick = {
+            navController.navigate(Screen.SettingScreen.WhyNotCompose.route)
+        }) {
+            Text(text = "Why-NOt-COmpose")
         }
 
 
@@ -616,4 +629,184 @@ fun Component2(counter: Int) {
 
     Text(text = "value of count = $counter")
 }
+
+
+
+
+
+data class MenuItem(
+    val name: String,
+    @DrawableRes val icon: Int,
+    val color: Color
+)
+
+private val menuItems = listOf(
+    MenuItem(
+        name = "Animations",
+        icon = R.drawable.animation,
+        color = Color.Yellow
+
+    ),
+    MenuItem(
+        name = "Compositions",
+        icon = R.drawable.composition,
+        color = Color.Red
+
+    ),
+    MenuItem(
+        name = "UIs",
+        icon = R.drawable.ui,
+        color = Color.Cyan
+
+    ),
+    MenuItem(
+        name = "Tutorials",
+        icon = R.drawable.tutorial,
+        color = Color.Green
+    )
+
+    )
+
+@Composable
+fun WhyNotCompose(
+    navigate: (Screen) -> Unit = {},
+    turnOnDarkMode: (Boolean) -> Unit = {}
+) {
+    val context = LocalContext.current
+
+    val isDark = !MaterialTheme.colors.isLight
+
+    val (darkModeState, onDarkModeStateChange) = remember { mutableStateOf(isDark) }
+
+    Scaffold()
+    { padding ->
+
+        Column(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.weight(1f)) {
+                androidx.compose.foundation.lazy.grid.LazyVerticalGrid(
+                    modifier = Modifier.fillMaxSize(),
+                    columns = GridCells.Fixed(2),
+                    contentPadding = PaddingValues(24.dp, 8.dp, 24.dp, 8.dp)
+
+                ) {
+                    item(span = { GridItemSpan(maxCurrentLineSpan) }) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 16.dp,
+                                        top = 32.dp,
+                                        end = 16.dp
+                                    )
+                                    .fillMaxWidth(),
+                                text = stringResource(id = R.string.app_name),
+                                style = MaterialTheme.typography.h5,
+                                fontFamily = FontFamily.Monospace,
+                                textAlign = TextAlign.Center,
+                            )
+
+                            Text(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 16.dp,
+                                        top = 4.dp,
+                                        end = 16.dp,
+                                        bottom = 32.dp
+                                    ),
+                                text = "Version ${BuildConfig.VERSION_NAME}",
+                                textAlign = TextAlign.Center,
+                                fontSize = 12.sp,
+                            )
+
+                        }
+                    }
+                    item {
+                        ModuleButton(
+                            name = if (isDark) "Dark Mode" else "Light Mode",
+                            icon = if (isDark) R.drawable.dark else R.drawable.light,
+                            color = Color.LightGray,
+                            onClick = {
+
+                                Toast.makeText(context, "Hello compose", Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    }
+
+                    items(menuItems) { menu ->
+                        ModuleButton(
+                            name = menu.name,
+                            icon = menu.icon,
+                            color = menu.color,
+                            onClick = {
+
+
+                            }
+                        )
+
+                    }
+
+
+                }
+            }
+        }
+
+    }
+
+
+}
+
+@Composable
+fun ModuleButton(
+    name: String,
+    @DrawableRes icon: Int,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .shadow(
+                spotColor = color,
+                elevation = 32.dp,
+                ambientColor = color,
+            ),
+        shape = MaterialTheme.shapes.medium,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.surface,
+            contentColor = color
+        ),
+        onClick = onClick,
+        contentPadding = PaddingValues(8.dp),
+        elevation = null
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                modifier = Modifier.size(32.dp),
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                tint = LocalContentColor.current
+            )
+            Text(
+                modifier = Modifier
+                    .padding(top = 8.dp),
+                text = name,
+                color = LocalContentColor.current,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                fontSize = 17.sp
+            )
+        }
+    }
+}
+
 
