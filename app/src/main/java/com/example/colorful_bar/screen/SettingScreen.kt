@@ -109,6 +109,12 @@ fun SettingScreen(navController: NavController) {
             Text(text = "Why-NOt-COmpose")
         }
 
+        Button(onClick = {
+            navController.navigate(Screen.SimpleProfileApp.route)
+        }) {
+            Text(text = "Simple_Profile_App")
+        }
+
 
     }
 }

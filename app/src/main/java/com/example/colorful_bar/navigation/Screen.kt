@@ -9,6 +9,7 @@ sealed class Screen(val route: String) {
     object Profile : Screen("profile_screen")
     object Setting : Screen("setting_screen")
     object Favourite : Screen("favourite_screen")
+    object SimpleProfileApp : Screen("simple_profile_app")
 
 
     //    Setting Screen

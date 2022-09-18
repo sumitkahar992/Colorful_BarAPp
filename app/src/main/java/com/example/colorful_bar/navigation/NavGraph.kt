@@ -44,6 +44,10 @@ fun NavGraph(
             FavouriteScreen()
         }
 
+        composable(route = Screen.SimpleProfileApp.route) {
+            SimpleProfileApp()
+        }
+
 
 
 
