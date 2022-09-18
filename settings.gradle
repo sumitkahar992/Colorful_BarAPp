@@ -16,4 +16,3 @@ rootProject.name = "Colorful_Bar"
 include ':app'
 include ':Test'
 include ':Test'
-include ':instagram'
