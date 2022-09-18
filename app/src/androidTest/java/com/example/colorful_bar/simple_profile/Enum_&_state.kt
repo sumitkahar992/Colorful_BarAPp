@@ -1,4 +1,4 @@
-package com.example.test
+package com.example.colorful_bar.test
 
 import java.io.IOException
 
@@ -148,7 +148,7 @@ object Repository {
 //}
 //fun getResult(result: Result){
 //    return when(result){
-//        is com.example.test.Error -> {
+//        is com.example.colorful_bar.test.Error -> {
 //            println(result.exception.toString())
 //        }
 //        is Success -> {

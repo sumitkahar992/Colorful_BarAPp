@@ -1,12 +1,10 @@
-package firstunittest
+package com.example.colorful_bar.simple_profile
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun main(){
-
-
 
     runBlocking {
         val job1 = launch {
@@ -33,6 +31,8 @@ fun main(){
         println("Job1 will be cancelled")
         job1.cancel()
     }
+
+
 
 
 

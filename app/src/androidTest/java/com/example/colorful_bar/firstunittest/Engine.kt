@@ -1,4 +1,4 @@
-package firstunittest
+package com.example.colorful_bar.firstunittest
 
 class Engine(
     val cc: Int,

@@ -1,4 +1,4 @@
-package firstunittest
+package com.example.colorful_bar.firstunittest
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
